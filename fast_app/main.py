@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-from . import crud, models
+from . import crud, models, schemas
 from .database import engine, SessionLocal
 
 models.Base.metadata.create_all(bind=engine)
@@ -13,14 +13,19 @@ def get_db():
     finally:
         db.close()
 
-# Create the FastAPI
+
 app = FastAPI()
 
-@app.post("/create/", response_model=Todo)
-def create_todo(
-    id: int,
-    title: str, 
-    is_complete: bool, 
+@app.post("/todos/")
+def get_todos(
+
     db: Session = Depends(get_db)
     ):
-    return crud.create_todo_item(db=db, id=id, title=title, is_complete=is_complete)
+    return crud.create_todo_item(db=db, new_todo=new_todo)
+
+@app.post("/create/")
+def create_todo(
+    new_todo: schemas.TodoCreate,
+    db: Session = Depends(get_db)
+    ):
+    return crud.create_todo_item(db=db, new_todo=new_todo)

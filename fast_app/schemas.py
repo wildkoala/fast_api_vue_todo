@@ -1,12 +1,20 @@
+from fast_app.database import Base
+from typing import Optional
 from pydantic import BaseModel
 
 
-class TodoBase(BaseModel):
+class TodoCreate(BaseModel):
     title: str
-    in_complete: bool
 
-class Todo(TodoBase):
+class TodoRD(BaseModel):
     id: int
 
-    class Config:
-        orm_mode = True
+class TodoUpdate(BaseModel):
+    id: int
+    new_title: Optional[str]
+    new_is_complete: Optional[bool]
+
+class Todo(BaseModel):
+    id: int
+    title: str
+    is_complete: bool
