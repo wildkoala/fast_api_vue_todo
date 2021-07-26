@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import Optional
 from . import crud, models, schemas
@@ -15,6 +16,17 @@ def get_db():
 
 
 app = FastAPI()
+
+# Tried letting my Vue application to reach this api... Not working
+# CORs still blocking
+origins = ["http://localhost:3000/"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Get a specific todo
 @app.get("/todo/{todo_id}")
