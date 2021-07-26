@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import Optional
 from . import crud, models, schemas
@@ -35,12 +35,14 @@ def create_todo(
     return crud.create_todo_item(db=db, new_todo=new_todo)
 
 # Update an existing todo
-@app.put("/todo/{todo_id}")
+@app.put("/update/{todo_id}")
 def update_todo(todo_id: int, 
                 new_title: Optional[str] = None, 
                 new_is_complete: Optional[bool] = None,
                 db: Session = Depends(get_db)
                 ):
+    if new_title == None and new_is_complete == None:
+        raise HTTPException(status_code=400, detail="Must provide new title or is_complete value")
     return crud.update_todo(db=db, todo_id=todo_id, new_title=new_title, new_is_complete=new_is_complete)
-    
+
 # Delete a todo
