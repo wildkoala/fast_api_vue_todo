@@ -46,3 +46,8 @@ def update_todo(todo_id: int,
     return crud.update_todo(db=db, todo_id=todo_id, new_title=new_title, new_is_complete=new_is_complete)
 
 # Delete a todo
+@app.delete("/delete/{todo_id}")
+def delete_todo(todo_id: int, 
+                db: Session = Depends(get_db)
+                ):
+    return crud.delete_todo(db=db, todo_id=todo_id)

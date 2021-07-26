@@ -28,4 +28,8 @@ def update_todo(db: Session, todo_id: int, new_title: str, new_is_complete: bool
     db.commit()
     db.refresh(to_update)
     return to_update
-    
+
+def delete_todo(db: Session, todo_id: int):
+    to_delete = db.query(models.Todo).filter(models.Todo.id == todo_id).delete()
+    db.commit()
+    return {'Deleted' : todo_id}
