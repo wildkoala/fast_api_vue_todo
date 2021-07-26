@@ -2,22 +2,24 @@
   <div class="hello">
       <h1>TODOS BOX</h1>
       <ul>
-        <li v-for="item in items"  v-bind:key="item.id">
-            {{ item.message }}
+        <li v-for="todo in api_todos"  v-bind:key="todo.id">
+            <Todo v-bind:="todo" />
         </li>
       </ul>
   </div>
 </template>
 
 <script>
+import Todo from './Todo.vue'
+
 export default {
   name: 'Todos',
-  props: {
-    msg: String
+  components: {
+    Todo
   },
   data: function () {
     return {
-      items: [{ id: 1, message: 'Foo' }, { id: 2, message: 'Bar' }]
+      api_todos: [{ id: 1, title: 'First', is_complete: false }, { id: 2, title: 'Bar', is_complete: false }]
     }
   }
 }
