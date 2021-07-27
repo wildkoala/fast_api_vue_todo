@@ -4,7 +4,7 @@
 
       <table id="customers">
         <tr>
-          <th>ID</th>
+          <!-- <th>ID</th> -->
           <th>Title</th>
           <th>Is Complete</th>
         </tr>

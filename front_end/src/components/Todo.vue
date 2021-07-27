@@ -1,7 +1,14 @@
 <template>
-    <td>{{ id }}</td>
-    <td>{{ title }}</td>
-    <td>{{ is_complete }}</td>
+    <!-- <td>{{ id }}</td> -->
+    <td v-if="is_complete === true" class="complete">{{ title }}</td>
+    <td v-else>{{ title }}</td>
+    <td>      
+      <label class="container">
+        <input v-if="is_complete === true" type="checkbox" checked="checked">
+        <input v-else type="checkbox" >
+        <span class="checkmark"></span>
+      </label>
+    </td>
 </template>
 
 <script>
@@ -26,4 +33,9 @@ export default {
 a {
   color: #42b983;
 }
+
+.complete {
+  text-decoration: line-through;
+}
+
 </style>
