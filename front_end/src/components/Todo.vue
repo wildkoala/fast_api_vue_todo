@@ -1,7 +1,7 @@
 <template>
-  <div>
-      <h3>{{ id }}, {{ title }}, {{ is_complete }}</h3>
-  </div>
+    <td>{{ id }}</td>
+    <td>{{ title }}</td>
+    <td>{{ is_complete }}</td>
 </template>
 
 <script>
