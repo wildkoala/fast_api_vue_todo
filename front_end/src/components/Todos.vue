@@ -48,6 +48,7 @@ export default {
 }
 
 table {
+  table-layout: fixed;
   margin-left: auto;
   margin-right: auto;
 }
