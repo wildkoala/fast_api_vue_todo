@@ -1,9 +1,9 @@
 <template>
-    <td v-if="is_complete === true" class="complete">{{ title }}</td>
-    <td v-else>{{ title }}</td>
+    <td v-if="todo_is_complete === true" class="complete">{{ todo_title }}</td>
+    <td v-else>{{ todo_title }}</td>
     <td>      
       <label class="container">
-        <input v-on:click="toggle_complete" v-if="is_complete === true" type="checkbox" checked="checked">
+        <input v-on:click="toggle_complete" v-if="todo_is_complete === true" type="checkbox" checked="checked">
         <input v-on:click="toggle_complete" v-else type="checkbox" >
         <span class="checkmark"></span>
       </label>
@@ -13,6 +13,13 @@
 <script>
 export default {
   name: 'Todo',
+  data: function() {
+    return {
+      todo_id: this.$props.id,
+      todo_title: this.$props.title,
+      todo_is_complete: this.$props.is_complete
+    }
+  },
   props: {
     id: {
         type: Number,
@@ -26,13 +33,15 @@ export default {
   },
   methods: {
     toggle_complete: function() {
-      //alert(!this.$props.is_complete)
-      fetch(`http://localhost:8000/update/${this.$props.id}?new_is_complete=${!this.$props.is_complete}`, {
+      fetch(`http://localhost:8000/update/${this.$data.todo_id}?new_is_complete=${!this.$data.todo_is_complete}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         }
       })
+        .then((resp) => resp.json())
+        .then(data => this.$data.todo_is_complete = data.is_complete)
+        .catch(err => console.log(err.message))
     }
   }
 }
