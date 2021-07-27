@@ -47,6 +47,11 @@ export default {
   flex-direction: column;
 }
 
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 ul {
   list-style-type: none;
 }
@@ -54,7 +59,8 @@ ul {
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  text-align: center;
+  width: 80%;
 }
 
 #customers td, #customers th {
