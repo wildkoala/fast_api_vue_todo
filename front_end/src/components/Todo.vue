@@ -1,11 +1,10 @@
 <template>
-    <!-- <td>{{ id }}</td> -->
     <td v-if="is_complete === true" class="complete">{{ title }}</td>
     <td v-else>{{ title }}</td>
     <td>      
       <label class="container">
-        <input v-if="is_complete === true" type="checkbox" checked="checked">
-        <input v-else type="checkbox" >
+        <input v-on:click="toggle_complete" v-if="is_complete === true" type="checkbox" checked="checked">
+        <input v-on:click="toggle_complete" v-else type="checkbox" >
         <span class="checkmark"></span>
       </label>
     </td>
@@ -23,6 +22,17 @@ export default {
     },
     is_complete: {
         type: Boolean,
+    }
+  },
+  methods: {
+    toggle_complete: function() {
+      //alert(!this.$props.is_complete)
+      fetch(`http://localhost:8000/update/${this.$props.id}?new_is_complete=${!this.$props.is_complete}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
     }
   }
 }

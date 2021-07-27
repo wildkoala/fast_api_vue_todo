@@ -19,7 +19,7 @@ app = FastAPI()
 
 # Tried letting my Vue application to reach this api... Not working
 # CORs still blocking
-origins = ["http://localhost:3000/"]
+origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

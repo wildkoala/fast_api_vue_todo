@@ -20,9 +20,10 @@ def update_todo(db: Session, todo_id: int, new_title: str, new_is_complete: bool
         return -1 
     
     to_update = db.query(models.Todo).filter(models.Todo.id == todo_id).first()
-    if new_title:
+    print(to_update)
+    if new_title != None:
         to_update.title = new_title
-    if new_is_complete:
+    if new_is_complete != None:
         to_update.is_complete = new_is_complete
 
     db.commit()
