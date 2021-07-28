@@ -9,8 +9,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "gridjs": "^5.0.1",
-    "gridjs-vue": "^5.0.1",
     "vue": "^3.0.0"
   },
   "devDependencies": {
