@@ -5,9 +5,9 @@ version: '3.8'
 services:
   web:
     build: ./front_end
-    command: http-server dist -p 4444
+    command: http-server dist -p 80
     ports: 
-      - 4444:4444
+      - 80:80
     depends_on: 
       - api
   api:
