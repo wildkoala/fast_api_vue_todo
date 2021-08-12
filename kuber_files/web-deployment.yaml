@@ -28,11 +28,11 @@ spec:
             - http-server
             - dist
             - -p
-            - "80"
+            - "7272"
           image: web
           name: web
           ports:
-            - containerPort: 80
+            - containerPort: 7272
           resources: {}
       restartPolicy: Always
 status: {}
