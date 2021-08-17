@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-deployment
+  namespace: deployment-todo
   labels:
     app: todo-web
 spec:
@@ -21,7 +22,7 @@ spec:
             - dist
             - -p
             - "7272"
-          image: <link to web image on gitlab>
+          image: leap.dev.local:4567/container-images/todos/todo-imgs:1.0.0
           name: todo-web
           ports:
             - containerPort: 7272
@@ -34,6 +35,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-service
+  namespace: deployment-todo
 spec:
   ports:
     - name: "7272"
@@ -49,6 +51,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-deployment
+  namespace: deployment-todo
   labels:
     app: todo-api
 spec:
@@ -72,7 +75,7 @@ spec:
                 secretKeyRef:
                   name: api-secret
                   key: database_url
-          image: <link to api image on gitlab>
+          image: leap.dev.local:4567/container-images/todos/todo-api:1.0.0
           name: api
           ports:
             - containerPort: 8000
@@ -84,6 +87,7 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: deployment-todo
   name: api-service
 spec:
   selector:
@@ -98,6 +102,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-deployment
+  namespace: deployment-todo
   labels:
     app: todo-postgres
 spec:
@@ -134,6 +139,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres-service
+  namespace: deployment-todo
 spec:
   selector:
     app: todo-postgres
