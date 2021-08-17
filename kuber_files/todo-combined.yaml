@@ -23,6 +23,7 @@ spec:
             - -p
             - "7272"
           image: leap.dev.local:4567/container-images/todos/todo-imgs:1.0.0
+          imagePullPolicy: IfNotPresent
           name: todo-web
           ports:
             - containerPort: 7272
@@ -76,6 +77,7 @@ spec:
                   name: api-secret
                   key: database_url
           image: leap.dev.local:4567/container-images/todos/todo-api:1.0.0
+          imagePullPolicy: IfNotPresent
           name: api
           ports:
             - containerPort: 8000
